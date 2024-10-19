@@ -56,3 +56,8 @@ if __name__ == "__main__":
 # The assert statement is a debugging aid, not for handling run-time errors.
 # An assertion error should indicate a bug in the program.
 # Assertions help developers quickly identify the likely root cause of bugs.
+
+# Use regular if statements for data validation instead of assertions,
+# as assertions can be globally disabled with an interpreter setting (-O and -OO flags).
+# Avoid using non-empty tuples in assert statements, as they always
+# evaluate to true in Python, causing the assertion to never fail.
