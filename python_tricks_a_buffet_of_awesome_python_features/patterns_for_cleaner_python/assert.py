@@ -1,43 +1,51 @@
-def calculate_price(product, discount):
-    return int(product["price"] * (1.0 - discount))
+def calculate_discounted_price(product_info, discount_rate):
+    """Calculates the price after applying a discount to the product."""
+    return int(product_info["price"] * (1.0 - discount_rate))
 
 
-def apply_discount_with_assert(product, discount):
-    assert 0 <= discount <= 1, f"Discount must be between 0 and 1. it is '{discount}'."
-    return calculate_price(product, discount)
+def apply_discount_with_assertion(product_info, discount_rate):
+    """Applies a discount and uses an assertion to validate the discount rate."""
+    is_discount_valid = 0 <= discount_rate <= 1
+    assert (
+        is_discount_valid
+    ), f"Discount must be between 0 and 1. It is '{discount_rate}'."
+    return calculate_discounted_price(product_info, discount_rate)
 
 
-def apply_discount_with_exception(product, discount):
-    if 0 <= discount <= 1:
-        return calculate_price(product, discount)
+def apply_discount_with_error_handling(product_info, discount_rate):
+    """Applies a discount and raises a ValueError if the discount rate is invalid."""
+    is_discount_valid = 0 <= discount_rate <= 1
+    if is_discount_valid:
+        return calculate_discounted_price(product_info, discount_rate)
     else:
-        raise ValueError(f"Discounted price is out of valid range. it is '{discount}'.")
+        raise ValueError(f"Discount must be between 0 and 1. It is '{discount_rate}'.")
 
 
-def apply_discount_with_debug(product, discount):
-    expression1 = 0 <= discount <= 1
-    expression2 = f"Discounted price is out of valid range. it is '{discount}'."
+def apply_discount_with_debug_check(product_info, discount_rate):
+    """Applies a discount with a debug check for invalid discount rates."""
+    is_discount_valid = 0 <= discount_rate <= 1
+    error_message = f"Discount must be between 0 and 1. It is '{discount_rate}'."
     if __debug__:
-        if not expression1:
-            raise AssertionError(expression2)
-        return calculate_price(product, discount)
+        if not is_discount_valid:
+            raise AssertionError(error_message)
+    return calculate_discounted_price(product_info, discount_rate)
 
 
 if __name__ == "__main__":
-    shoes = {
+    product_example = {
         "name": "Fancy Shoes",
         "price": 14900,
     }
-    discount = 0.5
+    discount_rate = 0.5
 
-    price = apply_discount_with_assert(shoes, discount)
-    print(price)
+    final_price = apply_discount_with_assertion(product_example, discount_rate)
+    print(final_price)
 
-    price = apply_discount_with_exception(shoes, discount)
-    print(price)
+    final_price = apply_discount_with_error_handling(product_example, discount_rate)
+    print(final_price)
 
-    price = apply_discount_with_debug(shoes, discount)
-    print(price)
+    final_price = apply_discount_with_debug_check(product_example, discount_rate)
+    print(final_price)
 
 # At its core, Python’s assert statement is a debugging aid that tests a
 # condition. If the assert condition is true, nothing happens, and your

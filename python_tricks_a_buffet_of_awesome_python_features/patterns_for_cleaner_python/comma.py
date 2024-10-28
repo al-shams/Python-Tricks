@@ -1,13 +1,25 @@
 # Bad Use Case: Unintentional Merging of Strings
+# The missing comma causes "Dilbert" and "Jane" to merge into a single string.
 names = [
     "Alice",
     "Bob",
     "Dilbert"  # <- Missing comma!
+    "Jane",  # This merges with the previous line, resulting in "DilbertJane".
+]
+print(names)
+
+# Good Use Case: Properly separated strings in the list
+names = [
+    "Alice",
+    "Bob",
+    "Dilbert",  # <- Correct comma placement
     "Jane",
 ]
 print(names)
 
 # Good Use Case: Cleaner Multi-Line Strings
+# Here, the parentheses around the string allow it to be spread over multiple lines.
+# No need for backslashes, making it cleaner and more readable.
 my_str = (
     "This is a super long string constant "
     "spread out across multiple lines. "
@@ -15,11 +27,13 @@ my_str = (
 )
 print(my_str)
 
-# Consistent Comma Usage in Collections
+# Good Practice: Consistent trailing comma usage in collections
+# Including a trailing comma helps with maintaining consistency
+# and makes additions or reordering easier.
 names = [
     "Alice",
     "Bob",
-    "Dilbert",
+    "Dilbert",  # <- Trailing comma helps avoid mistakes when new elements are added
 ]
 print(names)
 
